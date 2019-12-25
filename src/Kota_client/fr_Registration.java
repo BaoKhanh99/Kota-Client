@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class fr_Registration extends javax.swing.JFrame {
-
+    String[] user = new String[7] ;
     /**
      * Creates new form fr_registration
      */
@@ -173,30 +173,19 @@ public class fr_Registration extends javax.swing.JFrame {
     private void btn_RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegisterActionPerformed
         if("".equals(tf_UserName.getText()) || "".equals(tf_Address.getText()) || "".equals(tf_YoB.getText()) || "".equals(tf_Account.getText()) || "".equals(tf_Password.getText()) || "".equals(tf_ReTypePass.getText())){
             JOptionPane.showMessageDialog(rootPane, "Please fill in your details");
-            /*if("".equals(tf_UserName.getText()))
-                JOptionPane.showMessageDialog(rootPane, "Please fill your name");
-            if("".equals(tf_Address.getText()))
-                JOptionPane.showMessageDialog(rootPane, "Please fill your adress");
-            if("".equals(tf_YoB.getText()))
-                JOptionPane.showMessageDialog(rootPane, "Please fill your year of birth");
-            if("".equals(tf_Account.getText()))
-                JOptionPane.showMessageDialog(rootPane, "Please fill your account");
-            if("".equals(tf_Password.getText()))
-                JOptionPane.showMessageDialog(rootPane, "Please fill your password");
-            if("".equals(tf_ReTypePass.getText()))
-                JOptionPane.showMessageDialog(rootPane, "Please retype your password");*/
         }
         else if(!tf_Password.getText().equals(tf_ReTypePass.getText())){
                 JOptionPane.showMessageDialog(rootPane, "Please retype your password");
             }
         else{
-            Infor_User information_User = new Infor_User();
-            information_User.setUserName(tf_UserName.getText());
-            information_User.setAddress(tf_Address.getText());
-            information_User.setYoB(Integer.valueOf(tf_YoB.getText()));
-            information_User.setAccount(tf_Account.getText());
-            information_User.setPassword(tf_Password.getText());
-            
+            user[0] = tf_UserName.getText();
+            System.out.println(user[0]);
+            user[1] = tf_Address.getText();
+            user[2] = tf_YoB.getText();
+            user[3] = tf_Account.getText();
+            user[4] = tf_Password.getText();
+            Socket_Receive information_User = new Socket_Receive();
+            information_User.setData(user);
             Socket_Client sc = new Socket_Client();
             try {
                 sc.Socket_Client(information_User);

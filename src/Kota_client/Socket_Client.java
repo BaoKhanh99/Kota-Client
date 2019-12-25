@@ -31,21 +31,13 @@ import java.util.logging.Logger;
  * @author PC
  */
 public class Socket_Client {
-    public void Socket_Client(Infor_User data_Client) throws InterruptedException{
-        
-
-        String[] User = new String[5];
-        User[0] = data_Client.getUserName();
-        User[1] = data_Client.getAddress();
-        User[2] = String.valueOf(data_Client.getYoB());
-        User[3] = data_Client.getAccount();
-        User[4] = data_Client.getPassword();
+    public void Socket_Client(Socket_Receive data_Client) throws InterruptedException{
         System.out.println("gan du lieu thanh cong");
         try {
             Socket socket = new Socket("localhost",9999);
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            //data_Client = new Infor_User(User[0], User[1], Integer.parseInt(User[2]), User[3], User[4]);
-            System.out.println(data_Client.getPassword());
+            //data_Client = new Socket_Receive(User[0], User[1], Integer.parseInt(User[2]), User[3], User[4]);
+            System.out.println(data_Client);
             oos.writeObject(data_Client);
             System.out.println("gui du lieu thanh cong");
             socket.close();
