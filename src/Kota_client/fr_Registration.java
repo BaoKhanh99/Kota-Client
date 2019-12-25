@@ -186,6 +186,7 @@ public class fr_Registration extends javax.swing.JFrame {
             user[4] = tf_Password.getText();
             Socket_Receive information_User = new Socket_Receive();
             information_User.setData(user);
+            information_User.setAction("reg");
             Socket_Client sc = new Socket_Client();
             try {
                 sc.Socket_Client(information_User);
