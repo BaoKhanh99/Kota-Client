@@ -9,21 +9,28 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import Kota_client.Kota_Client;
+import java.io.DataOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 /**
  *
  * @author PC
  */
 public class fr_Registration extends javax.swing.JFrame {
     String[] user = new String[7] ;
+    
     /**
      * Creates new form fr_registration
      */
+    ObjectOutputStream out;
     String[] Info_User = new String[10];
     public fr_Registration() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,23 +185,25 @@ public class fr_Registration extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Please retype your password");
             }
         else{
-            user[0] = tf_UserName.getText();
-            System.out.println(user[0]);
-            user[1] = tf_Address.getText();
-            user[2] = tf_YoB.getText();
-            user[3] = tf_Account.getText();
-            user[4] = tf_Password.getText();
-            Socket_Receive information_User = new Socket_Receive();
-            information_User.setData(user);
-            information_User.setAction("reg");
-            Socket_Client sc = new Socket_Client();
+            user[0] = "reg";
+            user[1] = tf_UserName.getText();
+            user[2] = tf_Address.getText();
+            user[3] = tf_YoB.getText();
+            user[4] = tf_Account.getText();
+            user[5] = tf_Password.getText();
+            Socket_Data information_User = new Socket_Data();
+            information_User.data = user;
+            information_User.action = "reg";
             try {
-                sc.Socket_Client(information_User);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(fr_Registration.class.getName()).log(Level.SEVERE, null, ex);            }
-            JOptionPane.showMessageDialog(rootPane, "dang ki thanh cong");
-            new fr_Sign_In().setVisible(true);
-            dispose();
+            //ObjectOutputStream oos = new ObjectOutputStream(Kota_Client.sk.getOutputStream());
+            //data_Client = new Socket_Data(User[0], User[1], Integer.parseInt(User[2]), User[3], User[4]);
+                OutputStream o = Kota_Client.sk.getOutputStream();
+                out = new ObjectOutputStream(o);
+                out.writeObject(user);
+            } 
+            catch (IOException ex) {
+                Logger.getLogger(Socket_Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btn_RegisterActionPerformed
 

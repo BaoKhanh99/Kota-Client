@@ -10,19 +10,41 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author PC
  */
 public class Kota_Client {
 
-    /**
-     * @param args the command line arguments
-     */
+    public static Socket sk = null;
+    public static String ip_server = "localhost";
+    public static int socket_port = 9999;
+    public static boolean connected = false;
+    public static fr_Registration fr_Reg = new fr_Registration();
+    public static fr_Sign_In fr_Signin = new fr_Sign_In();
+    public static fr_Chat fr_Chat = new fr_Chat();
     public static void main(String[] args) throws IOException, InterruptedException {
         // TODO code application logic here
-        new fr_Registration().setVisible(true);
+        fr_Signin.setVisible(true);
         //new fr_Chat().setVisible(true);
+        Kota_Client.init();
+        
+    }
+    public static void init(){
+        
+        try {
+            sk = new Socket(ip_server,socket_port);
+            Thread Receive = new Receive(sk);
+            Receive.start();
+            connected = true;
+            System.out.println("conected");
+        } catch (IOException ex) {
+            Logger.getLogger(fr_Sign_In.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "socket error");
+        }
         
     }
     

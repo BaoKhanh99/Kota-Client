@@ -171,7 +171,7 @@ public class fr_Sign_In extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void regMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regMouseClicked
-        new fr_Registration().setVisible(true);
+        Kota_Client.fr_Reg.setVisible(true);
         dispose();
     }//GEN-LAST:event_regMouseClicked
 

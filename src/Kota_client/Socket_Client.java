@@ -31,17 +31,12 @@ import java.util.logging.Logger;
  * @author PC
  */
 public class Socket_Client {
-    public void Socket_Client(Socket_Receive data_Client) throws InterruptedException{
-        System.out.println("gan du lieu thanh cong");
+    public void Socket_Client(Socket_Data data_Client) throws InterruptedException{
         try {
             Socket socket = new Socket("localhost",9999);
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            //data_Client = new Socket_Receive(User[0], User[1], Integer.parseInt(User[2]), User[3], User[4]);
-            System.out.println(data_Client);
+            //data_Client = new Socket_Data(User[0], User[1], Integer.parseInt(User[2]), User[3], User[4]);
             oos.writeObject(data_Client);
-            System.out.println("gui du lieu thanh cong");
-            socket.close();
-            
         } 
         catch (IOException ex) {
             Logger.getLogger(Socket_Client.class.getName()).log(Level.SEVERE, null, ex);
